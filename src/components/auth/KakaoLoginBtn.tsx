@@ -15,12 +15,16 @@ export const KakaoLoginButton = () => {
         options: {
           redirectTo: `${window.location.origin}/auth/callback`,
           queryParams: {
-            scope: 'profile_nickname profile_image',
+            scope: 'profile_nickname profile_image', // 이메일 scope 제거
           },
         },
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Kakao OAuth error:', error.message);
+        throw error;
+      }
+      console.log('data', data);
       router.refresh();
     } catch (error) {
       console.error('Kakao login error:', error);

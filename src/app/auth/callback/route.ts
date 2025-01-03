@@ -9,12 +9,20 @@ export async function GET(request: Request) {
 
     if (code) {
       const supabase = createRouteHandlerClient({ cookies });
-      await supabase.auth.exchangeCodeForSession(code);
+      const { error } = await supabase.auth.exchangeCodeForSession(code);
+
+      // 이메일 관련 에러는 무시하고 진행
+      if (error && !error.message.includes('email')) {
+        throw error;
+      }
     }
 
-    return NextResponse.redirect(`${requestUrl.origin}`);
+    // 성공적으로 처리되면 홈으로 리다이렉트
+    return NextResponse.redirect(requestUrl.origin);
   } catch (error) {
     console.error('Auth callback error:', error);
-    return NextResponse.redirect(`${request.url}?error=Authentication failed`);
+    return NextResponse.redirect(
+      `${new URL(request.url).origin}?error=로그인 처리 중 오류가 발생했습니다`,
+    );
   }
 }
