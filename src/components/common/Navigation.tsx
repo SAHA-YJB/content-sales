@@ -1,7 +1,6 @@
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { FC } from 'react';
 
-export const Navigation: FC = () => {
+export const Navigation = () => {
   return (
     <Tabs defaultValue='products' className='sticky top-0 z-50 w-full'>
       <TabsList className='grid w-full grid-cols-2'>

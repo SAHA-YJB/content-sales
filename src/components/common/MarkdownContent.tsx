@@ -8,14 +8,14 @@ interface MarkdownContentProps {
   content: string;
 }
 
-export function MarkdownContent({ content }: MarkdownContentProps) {
+export const MarkdownContent = ({ content }: MarkdownContentProps) => {
   return (
     <ReactMarkdown
-      className='prose prose-slate dark:prose-invert max-w-none'
+      className='prose prose-slate max-w-none dark:prose-invert'
       rehypePlugins={[rehypeRaw]}
       remarkPlugins={[remarkGfm]}
     >
       {content}
     </ReactMarkdown>
   );
-}
+};

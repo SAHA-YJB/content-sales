@@ -13,12 +13,7 @@ export default function Home() {
       </div>
       <Navigation />
 
-      <HeroSection
-        title='Next.js 완벽 가이드'
-        description='Next.js의 모든 것을 배우는 완벽한 강의입니다. React Server Components부터 풀스택 개발까지 마스터하세요.'
-        price={99000}
-        imageUrl='/hero-image.jpg'
-      />
+      <HeroSection />
 
       <div className='w-full'>
         <MarkdownContent content={COURSE_CONTENT} />

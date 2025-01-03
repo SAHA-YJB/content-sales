@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/lib/supabase';
 
-export function KakaoLoginButton() {
+export const KakaoLoginButton = () => {
   const handleLogin = async () => {
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
@@ -26,9 +26,9 @@ export function KakaoLoginButton() {
   return (
     <Button
       onClick={handleLogin}
-      className='bg-[#FEE500] text-[#000000] hover:bg-[#FEE500]/90'
+      className='bg-[#FEE500] text-black hover:bg-[#FEE500]/90'
     >
       카카오로 시작하기
     </Button>
   );
-}
+};
