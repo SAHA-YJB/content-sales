@@ -1,25 +1,29 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/utils/supabase/client';
+import { useRouter } from 'next/navigation';
 
 export const KakaoLoginButton = () => {
+  const router = useRouter();
+
   const handleLogin = async () => {
+    const supabase = createClient();
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'kakao',
         options: {
           redirectTo: `${window.location.origin}/auth/callback`,
+          queryParams: {
+            scope: 'profile_nickname profile_image',
+          },
         },
       });
 
-      console.log(data, error);
-
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
+      router.refresh();
     } catch (error) {
-      console.error('카카오 로그인 에러:', error);
+      console.error('Kakao login error:', error);
     }
   };
 
