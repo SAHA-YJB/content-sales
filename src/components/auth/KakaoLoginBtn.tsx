@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 
@@ -15,7 +14,7 @@ export const KakaoLoginButton = () => {
         options: {
           redirectTo: `${window.location.origin}/auth/callback`,
           queryParams: {
-            scope: 'profile_nickname profile_image', // 이메일 scope 제거
+            scope: 'profile_nickname profile_image account_email',
           },
         },
       });
@@ -24,7 +23,7 @@ export const KakaoLoginButton = () => {
         console.error('Kakao OAuth error:', error.message);
         throw error;
       }
-      console.log('data', data);
+
       router.refresh();
     } catch (error) {
       console.error('Kakao login error:', error);
@@ -32,11 +31,11 @@ export const KakaoLoginButton = () => {
   };
 
   return (
-    <Button
+    <button
       onClick={handleLogin}
-      className='bg-[#FEE500] text-black hover:bg-[#FEE500]/90'
+      className='rounded-md bg-[#FEE500] px-4 py-2 text-black hover:bg-[#FEE500]/90'
     >
       카카오로 시작하기
-    </Button>
+    </button>
   );
 };
